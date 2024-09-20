@@ -30,5 +30,5 @@ public class UtenteService {
         return this.utenteRepository.findAll(pageable);
     }
 
-    
+
 }
