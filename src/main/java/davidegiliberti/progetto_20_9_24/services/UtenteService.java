@@ -2,6 +2,7 @@ package davidegiliberti.progetto_20_9_24.services;
 
 import davidegiliberti.progetto_20_9_24.entities.Utente;
 import davidegiliberti.progetto_20_9_24.exceptions.NotFoundEx;
+import davidegiliberti.progetto_20_9_24.payloads.UtenteDTO;
 import davidegiliberti.progetto_20_9_24.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,5 +31,9 @@ public class UtenteService {
         return this.utenteRepository.findAll(pageable);
     }
 
-
+    public Utente saveUtente(UtenteDTO body) {
+        Utente utente = new Utente(body.username(), body.nome(), body.cognome(), body.email(), bcrypt.encode(body.password()), body.ruolo());
+        Utente savedUtente = this.utenteRepository.save(utente);
+        return savedUtente;
+    }
 }
